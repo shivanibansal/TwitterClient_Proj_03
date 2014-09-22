@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tweety</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_photos">Flickr Photos</string>
+    <string name="login_label">Connect to Twitter</string>
+    <string name="mi_title_compse_tweet">Compose Tweets</string>
+    <string name="mi_title_refresh">Refresh</string>
+
+    <color name="color_app_action_bar">#349BE0</color>
+
+    <string name="title_activity_timeline">TimelineActivity</string>
+    <string name="title_activity_compose">ComposeActivity</string>
+	<string name="hint_enter_new_tweet">What\'s happing?</string>
+	<string name="mi_title_post_tweet_btn">Tweet</string>
+	<string name="mi_title_n_chars">140</string>
+</resources>

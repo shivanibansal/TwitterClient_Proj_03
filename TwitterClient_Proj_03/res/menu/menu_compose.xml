@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item
+        android:id="@+id/miNChars"
+        android:showAsAction="always|withText"
+        android:title="@string/mi_title_n_chars">
+    </item>
+
+	<item 
+        android:id="@+id/miPostTweet"
+        android:title="@string/mi_title_post_tweet_btn"
+        android:onClick="onClickPostTweet"
+        android:showAsAction="always|withText">
+    </item>
+    
+</menu>
+
