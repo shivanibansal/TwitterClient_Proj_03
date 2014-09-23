@@ -3,6 +3,8 @@ package com.yahoo.bshivani.basictwitter.activity;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.yahoo.bshivani.basictwitter.ComposeActivity;
 import com.yahoo.bshivani.basictwitter.R;
 import com.yahoo.bshivani.basictwitter.TwitterClient;
 import com.yahoo.bshivani.basictwitter.adapters.TweetAdapter;
@@ -100,16 +100,22 @@ public class TimelineActivity extends Activity {
 	public void setActionBar() {
 		client.getAccountDetails(new JsonHttpResponseHandler() {
 			@Override
-			public void onSuccess(JSONArray json) {
-				Log.d("setActionBar : debug", json.toString());
-				// tweetAdapter.addAll(Tweet.fromJsonArray(json));
-				// tweetAdapter.notifyDataSetChanged();
+			public void onSuccess(JSONObject json) {
+				Log.d("debug", json.toString());
+				try {
+					String userScreenName = json.getString("screen_name");
+					if (userScreenName != null)
+						getActionBar().setTitle("@" + userScreenName);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
 			};
-
+			
 			@Override
 			public void onFailure(Throwable e, String s) {
-				Log.d("setActionBar : debug", e.toString());
-				Log.d("setActionBar : debug", s.toString());
+				Log.d("debug", e.toString());
+				Log.d("debug", s.toString());
 			}
 		});
 	}

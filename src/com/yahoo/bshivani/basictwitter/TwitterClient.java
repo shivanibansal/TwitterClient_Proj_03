@@ -37,7 +37,7 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final String 	TWITTER_HOME_TIMELINE_MAX_ID_PARAM = "max_id=";
 	public static long	max_id	= 0;	 	
 	public static final String 	TWITTER_POST_TWEET_URL= "/statuses/update.json?status=";
-	public static final String 	TWITTER_USER_ACCOUNT = "/account/settings";
+	public static final String 	TWITTER_USER_ACCOUNT = "/account/verify_credentials.json";
 	
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);

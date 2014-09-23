@@ -5,7 +5,7 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <ImageView
-        android:id="@+id/etUserImage"
+        android:id="@+id/ivUserProfileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -20,7 +20,8 @@
         android:layout_alignParentTop="true"
         android:singleLine="true"
         android:layout_marginTop="12dp"
-        android:layout_toRightOf="@+id/etUserImage"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/ivUserProfileImage"
         android:ellipsize="end"
         android:text="Name"
         android:textStyle="bold" />
@@ -30,9 +31,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUserName"
-        android:layout_toRightOf="@+id/etUserImage"
+        android:layout_toRightOf="@+id/ivUserProfileImage"
         android:ellipsize="end"
         android:singleLine="true"
+        android:layout_marginLeft="15dp"
         android:textColor="#B5B5B5"
         android:text="\@screen_name" />
 
@@ -41,7 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etUserImage"
+        android:layout_below="@+id/ivUserProfileImage"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:maxLength="200"

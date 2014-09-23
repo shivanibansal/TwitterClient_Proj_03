@@ -48,7 +48,7 @@
             android:label="@string/title_activity_timeline" >
         </activity>
         <activity
-            android:name=".ComposeActivity"
+            android:name="com.yahoo.bshivani.basictwitter.activity.ComposeActivity"
             android:label="@string/title_activity_compose" >
         </activity>
     </application>

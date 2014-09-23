@@ -1,5 +1,6 @@
-package com.yahoo.bshivani.basictwitter;
+package com.yahoo.bshivani.basictwitter.activity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -14,16 +15,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.yahoo.bshivani.basictwitter.activity.TwitterApplication;
-import com.yahoo.bshivani.basictwitter.models.Tweet;
+import com.squareup.picasso.Picasso;
 import com.yahoo.bshivani.basictwitter.R;
+import com.yahoo.bshivani.basictwitter.TwitterClient;
+import com.yahoo.bshivani.basictwitter.R.id;
+import com.yahoo.bshivani.basictwitter.R.layout;
+import com.yahoo.bshivani.basictwitter.R.menu;
+import com.yahoo.bshivani.basictwitter.models.Tweet;
 
 
 public class ComposeActivity extends Activity {
 	public EditText 	etEnterNewTweet;
+	public TextView		tvUserName;
+	public TextView		tvUserScreenName;
+	public ImageView	ivUserImage;
+	public String		userProfileImageUrl;
 	public final int 	MAX_TWEET_LEN = 140;
 	public MenuItem 	miNumChars;
 	public MenuItem		miPostTweetBtn;
@@ -33,6 +44,12 @@ public class ComposeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compose_tweet);
 		etEnterNewTweet = (EditText) findViewById(R.id.etEnterNewTweet);
+		tvUserName = (TextView) findViewById(R.id.tvUserName);
+		tvUserScreenName = (TextView) findViewById(R.id.tvUserScreenName);
+		ivUserImage = (ImageView) findViewById(R.id.ivUserProfileImage);
+
+		setUserData();
+		getActionBar().setTitle("Compose Tweet");
 		
 		etEnterNewTweet.addTextChangedListener(new TextWatcher() {
 			
@@ -114,4 +131,39 @@ public class ComposeActivity extends Activity {
 		}), strTweet);
 	}
 
+	public void setUserData() {
+		TwitterClient 	client = TwitterApplication.getRestClient();
+		client.getAccountDetails(new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(JSONObject json) {
+				Log.d("debug", json.toString());
+				try {
+					String userName = json.getString("name");
+					String userScreenName = json.getString("screen_name");
+					String uProfileIgUrl = json.getString("profile_image_url_https");
+					
+					if (userName != null)
+						tvUserName.setText(userName);
+					if (userScreenName != null)
+						tvUserScreenName.setText("@" + userScreenName);
+					if (uProfileIgUrl != null)
+						userProfileImageUrl = uProfileIgUrl;
+
+					Picasso.with(getBaseContext()).load(userProfileImageUrl).into(ivUserImage);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 
+				
+				
+			};
+			
+			@Override
+			public void onFailure(Throwable e, String s) {
+				Log.d("debug", e.toString());
+				Log.d("debug", s.toString());
+			}
+		});
+	}
 }
